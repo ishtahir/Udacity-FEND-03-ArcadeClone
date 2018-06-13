@@ -1,25 +1,29 @@
-// Enemies our player must avoid
-var Enemy = function() {
-    // Variables applied to each of our instances go here,
-    // we've provided one for you to get started
+// create Enemy class
+class Enemy {
+    constructor() {
+        let enemyPosY = [63, 146, 229];
+        this.sprite = 'images/enemy-bug.png';
+        this.x = -101;
+        this.y = enemyPosY[Math.floor(Math.random() * enemyPosY.length)];
+        this.speed = Math.floor(Math.random() * 3) + 1;
+    }
+    // create enemy prototype function update with dt param
+    update(dt) {
+        if (this.x > -102) {
+            this.x += 101 * (dt * this.speed);
+        }
 
-    // The image/sprite for our enemies, this uses
-    // a helper we've provided to easily load images
-    this.sprite = 'images/enemy-bug.png';
-};
-
-// Update the enemy's position, required method for game
-// Parameter: dt, a time delta between ticks
-Enemy.prototype.update = function(dt) {
-    // You should multiply any movement by the dt parameter
-    // which will ensure the game runs at the same speed for
-    // all computers.
-};
-
-// Draw the enemy on the screen, required method for game
-Enemy.prototype.render = function() {
-    ctx.drawImage(Resources.get(this.sprite), this.x, this.y);
-};
+        // // check for collisions
+        if (player.x < this.x + 80 && this.x < player.x + 80 && player.y-10 < this.y + 80 && this.y < player.y-10 + 80) {
+            player.x = 202;
+            player.y = 405;
+        }
+    }
+    // create enemy prototype function render
+    render() {
+        ctx.drawImage(Resources.get(this.sprite), this.x, this.y);
+    }
+}
 
 // Now write your own player class
 // This class requires an update(), render() and
