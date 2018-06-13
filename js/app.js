@@ -59,11 +59,23 @@ class Player {
     }
 }
 
+function spawn() {
+    allEnemies.push(new Enemy());
+}
+
 // Now instantiate your objects.
 // Place all enemy objects in an array called allEnemies
 // Place the player object in a variable called player
 const allEnemies = [];
 const player = new Player();
+const bugsGalore = setInterval(function() {
+    spawn();
+    allEnemies.forEach(function(item) {
+        if (item.x > 500) {
+            allEnemies.splice(allEnemies.indexOf(item), 1);
+        }
+    });
+}, 1500);
 
 
 // This listens for key presses and sends the keys to your
