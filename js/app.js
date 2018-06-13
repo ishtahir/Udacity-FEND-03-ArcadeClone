@@ -1,4 +1,4 @@
-// create Enemy class
+// create enemy class
 class Enemy {
     constructor() {
         const enemyPosY = [63, 146, 229];
@@ -7,33 +7,28 @@ class Enemy {
         this.y = enemyPosY[Math.floor(Math.random() * enemyPosY.length)];
         this.speed = Math.floor(Math.random() * 3) + 1;
     }
-    // create enemy prototype function update with dt param
     update(dt) {
         if (this.x > -102) {
             this.x += 101 * (dt * this.speed);
         }
-
-        // // check for collisions
+        // check for collision
         if (player.x < this.x + 80 && this.x < player.x + 80 && player.y-10 < this.y + 80 && this.y < player.y-10 + 80) {
             player.x = 202;
             player.y = 405;
         }
     }
-    // create enemy prototype function render
     render() {
         ctx.drawImage(Resources.get(this.sprite), this.x, this.y);
     }
 }
 
-// Now write your own player class
-// This class requires an update(), render() and
-// a handleInput() method.
+// create player class
 class Player {
     constructor() {
         const playerPosX = [0, 101, 202, 303, 404];
         this.sprite = 'images/char-boy.png';
         this.x = playerPosX[Math.floor(Math.random() * playerPosX.length)];
-        this.y = 405; // 405, 322, 239, 156, 73, -10
+        this.y = 405;
     }
     update() {
 
@@ -59,17 +54,18 @@ class Player {
     }
 }
 
+
 function spawn() {
     allEnemies.push(new Enemy());
 }
 
-// Now instantiate your objects.
-// Place all enemy objects in an array called allEnemies
-// Place the player object in a variable called player
+// instantiate objects
 const allEnemies = [];
 const player = new Player();
+// function to release a bug every 1.5 secs
 const bugsGalore = setInterval(function() {
     spawn();
+    // after the bugs are off screen, remove from array
     allEnemies.forEach(function(item) {
         if (item.x > 500) {
             allEnemies.splice(allEnemies.indexOf(item), 1);
