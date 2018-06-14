@@ -1,3 +1,8 @@
+const modal = document.querySelector('.modal');
+const playAgainBtn = document.querySelector('button');
+const stats = document.querySelector('.stats');
+const congrats = document.querySelector('.congrats');
+
 // create enemy class
 class Enemy {
     constructor() {
@@ -31,7 +36,12 @@ class Player {
         this.y = 405;
     }
     update() {
-
+        if (player.y < 0) {
+            allEnemies.forEach(function(i) {
+                i.speed = 0;
+            });
+            showModal();
+        }
     }
     handleInput(keys) {
         if (keys === 'up' && this.y > -10)
@@ -57,6 +67,13 @@ class Player {
 
 function spawn() {
     allEnemies.push(new Enemy());
+}
+
+function showModal() {
+    congrats.textContent = 'Congratulations!';
+    stats.textContent = 'You win!';
+    playAgainBtn.textContent = 'Play Again';
+    modal.classList.add('show-modal');
 }
 
 // instantiate objects
@@ -85,4 +102,8 @@ document.addEventListener('keyup', function(e) {
     };
 
     player.handleInput(allowedKeys[e.keyCode]);
+});
+
+playAgainBtn.addEventListener('click', function() {
+    document.location.reload();
 });
