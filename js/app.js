@@ -6,6 +6,10 @@ const movesCell = document.querySelector('.moves');
 const timeCell = document.querySelector('.time');
 let moves = 0;
 let time = 0;
+let timer = setInterval(function() {
+    time++;
+    timeCell.textContent = `${time} secs`;
+}, 1000);
 
 // create enemy class
 class Enemy {
@@ -87,9 +91,13 @@ function spawn() {
 
 function showModal() {
     congrats.textContent = 'Congratulations!';
-    stats.textContent = 'You win!';
+    stats.innerHTML = `<p>Moves: ${moves}</p><p>Time: ${time} seconds</p>`;
     playAgainBtn.textContent = 'Play Again';
     modal.classList.add('show-modal');
+    if (timer) {
+        clearInterval(timer);
+        timer = undefined;
+    }
 }
 
 // instantiate objects
