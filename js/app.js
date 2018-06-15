@@ -6,10 +6,7 @@ const movesCell = document.querySelector('.moves');
 const timeCell = document.querySelector('.time');
 let moves = 0;
 let time = 0;
-let timer = setInterval(function() {
-    time++;
-    timeCell.textContent = `${time} secs`;
-}, 1000);
+let timer;
 
 // create enemy class
 class Enemy {
@@ -78,6 +75,13 @@ class Player {
             this.x = 404;
         else if (this.x > 404)
             this.x = 0;
+
+        if (moves > 0 && !timer) {
+            timer = setInterval(function() {
+                time++;
+                timeCell.textContent = `${time} secs`;
+            }, 1000);
+        }
     }
     render() {
         ctx.drawImage(Resources.get(this.sprite), this.x, this.y);
