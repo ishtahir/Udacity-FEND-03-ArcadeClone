@@ -2,6 +2,10 @@ const modal = document.querySelector('.modal');
 const playAgainBtn = document.querySelector('button');
 const stats = document.querySelector('.stats');
 const congrats = document.querySelector('.congrats');
+const movesCell = document.querySelector('.moves');
+const timeCell = document.querySelector('.time');
+let moves = 0;
+let time = 0;
 
 // create enemy class
 class Enemy {
@@ -44,14 +48,26 @@ class Player {
         }
     }
     handleInput(keys) {
-        if (keys === 'up' && this.y > -10)
+        if (keys === 'up' && this.y > -10) {
             this.y -= 83;
-        else if (keys === 'down' && this.y < 405)
+            moves++;
+            movesCell.textContent = moves;
+        }
+        else if (keys === 'down' && this.y < 405) {
             this.y += 83;
-        else if (keys === 'left')
+            moves++;
+            movesCell.textContent = moves;
+        }
+        else if (keys === 'left') {
             this.x -= 101;
-        else if (keys === 'right')
+            moves++;
+            movesCell.textContent = moves;
+        }
+        else if (keys === 'right') {
             this.x += 101;
+            moves++;
+            movesCell.textContent = moves;
+        }
 
         // if you go offscreen to the left and right you pop up on other side
         if (this.x < 0)

@@ -1,5 +1,26 @@
 body {
     text-align: center;
+    background: url('../images/intersection.png');
+    font-family: 'Bungee', cursive;
+    color: #65c051;
+}
+
+header {
+    font-size: 1.3em;
+    margin: 0;
+}
+
+p {
+    margin: 0;
+    padding: 0;
+}
+
+.moves-time {
+    width: 100%;
+    display: flex;
+    justify-content: space-around;
+    font-family: Arial;
+    color: #000;
 }
 
 /* GAMEEND MODAL */
