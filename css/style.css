@@ -59,7 +59,8 @@ p {
     transition: visibility 1s linear 1s, opacity 0.25 0s, transform 0.25s;
 }
 
-.modal .playAgainBtn {
+.modal .play-again-btn,
+.modal .start-btn {
    padding: 10px;
    font-size: 1em;
    min-width: 150px;
@@ -70,10 +71,11 @@ p {
    background-color: #e07cff;
    color: #fff;
    font-weight: bold;
-   margin: 30px 0;
+   margin: 30px auto;
 }
 
-.modal .playAgainBtn:hover {
+.modal .play-again-btn:hover,
+.modal .start-btn:hover {
    background-color: #fff;
    color: #e07cff;
 }
