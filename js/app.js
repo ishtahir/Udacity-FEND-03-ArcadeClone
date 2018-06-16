@@ -98,6 +98,7 @@ class Player {
             }
         }
 
+        // if player reaches the water increment score and reset player position
         if (this.y < 0) {
             score++;
             scoreCell.textContent = score;
