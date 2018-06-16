@@ -11,24 +11,36 @@ let timer;
 // create enemy class
 class Enemy {
     constructor() {
-        const enemyPosY = [63, 146, 229];
+        const enemyPosY = [63, 229, 395];
+        const leftEnemyPosY = [146, 312];
         this.sprite = 'images/enemy-bug.png';
+        this.spriteLeft = 'images/enemy-bug-left.png';
         this.x = -101;
         this.y = enemyPosY[Math.floor(Math.random() * enemyPosY.length)];
+        this.leftX = 505;
+        this.leftY = leftEnemyPosY[Math.floor(Math.random() * leftEnemyPosY.length)];
         this.speed = Math.floor(Math.random() * 3) + 1;
     }
     update(dt) {
-        if (this.x > -102) {
+        if (this.x > -102 && this.leftX < 506) {
             this.x += 101 * (dt * this.speed);
+            this.leftX -= 101 * (dt * this.speed);
         }
         // check for collision
         if (player.x < this.x + 80 && this.x < player.x + 80 && player.y-10 < this.y + 80 && this.y < player.y-10 + 80) {
             player.x = 202;
-            player.y = 405;
+            player.y = 488;
+            time += 10;
+        }
+        if (player.x < this.leftX + 80 && this.leftX < player.x + 80 && player.y-10 < this.leftY + 80 && this.leftY < player.y-10 + 80) {
+            player.x = 202;
+            player.y = 488;
+            time += 10;
         }
     }
     render() {
         ctx.drawImage(Resources.get(this.sprite), this.x, this.y);
+        ctx.drawImage(Resources.get(this.spriteLeft), this.leftX, this.leftY);
     }
 }
 
@@ -38,7 +50,7 @@ class Player {
         const playerPosX = [0, 101, 202, 303, 404];
         this.sprite = 'images/char-boy.png';
         this.x = playerPosX[Math.floor(Math.random() * playerPosX.length)];
-        this.y = 405;
+        this.y = 488;
     }
     update() {
         if (player.y < 0) {
@@ -54,7 +66,7 @@ class Player {
             moves++;
             movesCell.textContent = moves;
         }
-        else if (keys === 'down' && this.y < 405) {
+        else if (keys === 'down' && this.y < 488) {
             this.y += 83;
             moves++;
             movesCell.textContent = moves;
@@ -90,7 +102,7 @@ class Player {
 
 
 function spawn() {
-    allEnemies.push(new Enemy());
+    allEnemies.push(new Enemy(), new Enemy());
 }
 
 function showModal() {
